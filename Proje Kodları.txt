@@ -1,0 +1,40 @@
+import pandas as pd
+import numpy as np
+from pandas import ExcelWriter
+from pandas import ExcelFile
+from sklearn.preprocessing import LabelEncoder
+#VeriSeti
+df = pd.read_excel("C:/Users/MS/Desktop/VeriSetiYMGK.xlsx")
+df.head()
+df = df.rename(columns=df.iloc[0])
+df = df.drop(df.index[0])
+df.columns.values[0]="Tarih"
+df.head()
+df.isnull().values.any()
+missing_values_count = df.isnull().sum()
+missing_values_count[1:8]
+#Eksik veriler
+total_cells = np.product(df.shape)
+total_missing = missing_values_count.sum()
+#Eksik verilerin yüzdesi
+(total_missing/total_cells)* 100
+df1 = df.dropna()
+print(df1)
+df1.isnull().values.any()
+import matplotlib.pyplot as plt
+plt.plot(df["Tarih"],df["PM10 ( µg/m³ )"],marker='',markerfacecolor='black',color='black',label="PM10")
+plt.plot(df["Tarih"],df["SO2 ( µg/m³ )"],marker='',color='green',linewidth=2,label="SO2")
+plt.plot(df["Tarih"],df["CO ( µg/m³ )"],marker='',color='olive',linewidth=2,linestyle='dashed',label="CO")
+plt.plot(df["Tarih"],df["NO2 ( µg/m³ )"],marker='',color='yellow',label="NO2")
+plt.plot(df["Tarih"],df["NOX ( µg/m³ )"],marker='',color='red',label="NOX")
+plt.plot(df["Tarih"],df["O3 ( µg/m³ )"],marker='',markerfacecolor='blue',color='skyblue',label="O3")
+plt.plot(df["Tarih"],df["PM 2.5 ( µg/m³ )"],marker='',markerfacecolor='brown',color='brown',label="PM 2.5")
+plt.legend()
+plt.plot(df1["Tarih"],df1["PM10 ( µg/m³ )"],marker='',markerfacecolor='black',color='black',label="PM10")
+plt.plot(df1["Tarih"],df1["SO2 ( µg/m³ )"],marker='',color='green',linewidth=2,label="SO2")
+plt.plot(df1["Tarih"],df1["CO ( µg/m³ )"],marker='',color='olive',linewidth=2,linestyle='dashed',label="CO")
+plt.plot(df1["Tarih"],df1["NO2 ( µg/m³ )"],marker='',color='yellow',label="NO2")
+plt.plot(df1["Tarih"],df1["NOX ( µg/m³ )"],marker='',color='red',label="NOX")
+plt.plot(df1["Tarih"],df1["O3 ( µg/m³ )"],marker='',markerfacecolor='blue',color='skyblue',label="O3")
+plt.plot(df1["Tarih"],df1["PM 2.5 ( µg/m³ )"],marker='',markerfacecolor='brown',color='brown',label="PM 2.5")
+plt.legend()
